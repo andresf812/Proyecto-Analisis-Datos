@@ -23,11 +23,12 @@ def graficar_distribucion_normal(df, col):
     print(f"✅ Gráfica guardada como '{col}_distribucion.png'")
 
 def graficar_promedio(df, col):
-    plt.figure(figsize=(10, 6))
-    plt.plot(df[col], marker='o', linestyle='-', color='blue')
-    plt.title(f'Promedio de {col}')
-    plt.xlabel('Índice')
-    plt.ylabel(col)
-    plt.grid(True)
-    plt.savefig(f'{col}_promedio.png')
-    print(f"✅ Gráfica guardada como '{col}_promedio.png'")
+    plt.figure(figsize=(8, 8))
+    valores = df[col].value_counts().head(10)  # Tomamos los 10 valores más frecuentes (puedes ajustar esto)
+    etiquetas = valores.index.astype(str)
+
+    plt.pie(valores, labels=etiquetas, autopct='%1.1f%%', startangle=140)
+    plt.title(f'Distribución de {col} (Top 10 valores)')
+    plt.axis('equal')  # Mantener la proporción circular
+    plt.tight_layout()
+    plt.show()
