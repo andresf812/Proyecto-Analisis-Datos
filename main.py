@@ -1,4 +1,7 @@
-# main.py
+#----- Proyecto: Análisis de Datos de Zonas Horarias -----
+# Este script realiza un análisis estadístico y visualización de datos de estabilidad de servicio energético
+# en diferentes zonas horarias. Se enfoca en la columna 'PROMEDIO DIARIO EN HORAS'.
+# 1. Yaneth Berrio, 2. Santiago Quiroga, 3. Jose Luis Giraldo, 4. Sebastián Cortes, 5. Andrés Felipe Gutiérrez
 
 import pandas as pd
 from estadisticas import (
