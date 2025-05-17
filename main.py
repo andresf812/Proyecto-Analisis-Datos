@@ -22,6 +22,9 @@ print("Valores nulos por columna:\n", df.isnull().sum())
 print("Número de municipios únicos:", df["id_municipio"].nunique())
 
 col_horas = "promedio_diario_en_horas"
+ano_servicio = "Ano_servicio"
+
+# Filtrar datos
 df_filtrado = df[(df[col_horas] > 0) & (df[col_horas] <= 24)]
 
 # Estadísticas
@@ -35,4 +38,4 @@ posicion_percentil(df_filtrado, col_horas, valor=5)
 
 # Gráficas
 graficar_distribucion_normal(df_filtrado, col_horas)
-graficar_promedio(df_filtrado, col_horas)
+graficar_promedio( ano_servicio, col_horas)
