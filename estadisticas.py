@@ -1,20 +1,9 @@
+# estadisticas.py
+
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import norm
 
-def limpiar_texto(valor):
-    if isinstance(valor, str):
-        return (
-            valor.strip()
-            .lower()
-            .replace("á", "a")
-            .replace("é", "e")
-            .replace("í", "i")
-            .replace("ó", "o")
-            .replace("ú", "u")
-            .replace("ñ", "n")
-        )
-    return valor
 def mostrar_promedio(df, col):
     valor = df[col].mean()
     print(f"Promedio: {valor:.2f}")
@@ -53,15 +42,11 @@ def graficar_distribucion_normal(df, col):
     media = datos.mean()
     std = datos.std()
 
-
     plt.figure(figsize=(10, 6))
     plt.hist(datos, bins=30, density=True, alpha=0.6, color='skyblue', label='Datos')
-    
-    xmin, xmax = plt.xlim()
-    x = np.linspace(xmin, xmax, 100)
+    x = np.linspace(datos.min(), datos.max(), 100)
     p = norm.pdf(x, media, std)
     plt.plot(x, p, 'r', linewidth=2, label='Distribución Normal')
-    
     plt.title(f'Distribución de {col}')
     plt.xlabel(col)
     plt.ylabel('Densidad')
@@ -69,11 +54,11 @@ def graficar_distribucion_normal(df, col):
     plt.grid(True)
     plt.show()
 
-    def graficar_promedio(df, col):
-        plt.figure(figsize=(10, 6))
-        plt.plot(df[col], marker='o', linestyle='-', color='blue')
-        plt.title(f'Promedio de {col}')
-        plt.xlabel('Índice')
-        plt.ylabel(col)
-        plt.grid(True)
-        plt.show()
+def graficar_promedio(df, col):
+    plt.figure(figsize=(10, 6))
+    plt.plot(df[col], marker='o', linestyle='-', color='blue')
+    plt.title(f'Promedio de {col}')
+    plt.xlabel('Índice')
+    plt.ylabel(col)
+    plt.grid(True)
+    plt.show()
