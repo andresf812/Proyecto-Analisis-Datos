@@ -2,6 +2,16 @@
 
 import numpy as np
 
+def mostrar_max(df, col):
+    valor = df[col].max()
+    print(f"Máximo: {valor:.2f}")
+    return valor
+
+def mostrar_min(df, col):
+    valor = df[col].min()
+    print(f"Mínimo: {valor:.2f}")
+    return valor
+
 def mostrar_promedio(df, col):
     valor = df[col].mean()
     print(f"Promedio: {valor:.2f}")

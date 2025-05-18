@@ -24,7 +24,7 @@ Versión: carga adaptable a separadores
 import pandas as pd
 from limpieza import normalizar_dataset
 from estadisticas import (
-    mostrar_promedio, mostrar_mediana, mostrar_varianza,
+    mostrar_max, mostrar_min, mostrar_promedio, mostrar_mediana, mostrar_varianza,
     mostrar_desviacion_estandar, mostrar_percentiles, posicion_percentil)
 from graficas import (
     graficar_distribucion_normal, graficar_promedio, graficar_boxplot,
@@ -99,10 +99,12 @@ df_filtrado = df[filtro]
 
 print(df.columns)
 
-df_filtro_mun = df[df['id_municipio'] == 27745]
+df_filtro_mun = df[(df['id_municipio'] == 27745) & (df['ano_servicio'].between(2022, 2024))]
+
 
 print(f"--- Estadísticas de '{col_horas} ' ---")
-mostrar_promedio(df_filtro_mun, col_horas)
+mostrar_max(df_filtro_mun, col_horas)
+mostrar_min(df_filtro_mun, col_horas)
 mostrar_promedio(df_filtrado, col_horas)
 mostrar_mediana(df_filtrado, col_horas)
 mostrar_varianza(df_filtrado, col_horas)
@@ -115,10 +117,10 @@ posicion_percentil(df_filtrado, col_horas, valor=5)
 # -----------------------------------------------------------------------------
 
 #graficar_distribucion_normal(df_filtrado, col_horas)
-#graficar_promedio(df_filtrado, col_horas)
-graficar_promedio(df_filtro_mun, col_horas)
-#graficar_boxplot(df_filtrado, col_horas)
-#graficar_histograma(df_filtrado, col_horas)
+graficar_promedio(df_filtrado, col_horas)
+#graficar_promedio(df_filtro_mun, col_horas)
+graficar_boxplot(df_filtro_mun, col_horas)
+graficar_histograma(df_filtrado, col_horas)
 #graficar_barras_categoria(df_filtrado, col_horas)
 
 num_cols = [c for c in ['energia_activa', 'energia_reactiva', 'potencia_maxima', col_horas] if c in df_filtrado.columns]
