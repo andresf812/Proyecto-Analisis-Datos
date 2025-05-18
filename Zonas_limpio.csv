@@ -1284,6 +1284,7 @@ id_depatamento,departamento,id_municipio,municipio,id_localidad,localidad,ano_se
 91.0,amazonas,91540.0,puerto_narino,91540000.0,puerto_narino_(puerto_narino_-_amazonas),2023.0,1.0,112349.0,39609.0,228.98,martes,01/24/2023_07:30:00_pm,23.59
 91.0,amazonas,91798.0,tarapaca_(anm),91798000.0,tarapaca_(tarapaca_(anm)_-_amazonas),2023.0,1.0,26553.0,11970.0,96.94,martes,01/03/2023_02:45:00_pm,10.19
 5.0,antioquia,5873.0,vigia_del_fuerte,5873002.0,vegaez_(vigia_del_fuerte_-_antioquia),2023.0,1.0,5368.0,870.0,41.22,lunes,01/16/2023_08:00:00_pm,6.36
+,,,,,,,,,,,,,
 13.0,bolivar,13001.0,cartagena_de_indias,13001007.0,isla_fuerte_(cartagena_de_indias_-_bolivar),2023.0,1.0,37775.0,22357.0,230.05,miercoles,01/04/2023_10:30:00_pm,6.49
 13.0,bolivar,13001.0,cartagena_de_indias,13001037.0,isla_mucura_(cartagena_de_indias_-_bolivar),2023.0,1.0,6927.0,2640.0,20.83,domingo,01/08/2023_12:00:00_am,15.0
 13.0,bolivar,13001.0,cartagena_de_indias,13001017.0,santa_cruz_del_islote_(cartagena_de_indias_-_bolivar),2023.0,1.0,7041.0,2223.0,38.98,martes,01/10/2023_08:30:00_pm,7.56
@@ -3728,7 +3729,6 @@ id_depatamento,departamento,id_municipio,municipio,id_localidad,localidad,ano_se
 27.0,choco,27425.0,medio_atrato_(bete),27425000.0,bete_(medio_atrato_(bete)_-_choco),2020.0,6.0,13034.0,5977.0,72.0,martes,06/30/2020_07:15:00_pm,10.11
 27.0,choco,27495.0,nuqui,27495001.0,arusi_(nuqui_-_choco),2020.0,6.0,9660.0,3706.0,51.2,lunes,06/15/2020_07:45:00_pm,3.48
 27.0,choco,27495.0,nuqui,27495000.0,nuqui_(nuqui_-_choco),2020.0,6.0,226027.0,73899.0,458.66,lunes,06/08/2020_07:15:00_pm,8.0
-27.0,choco,27745.0,sipi,27745000.0,sipi_(sipi_-_choco),2020.0,6.0,10264.0,3066.0,79.2,martes,06/02/2020_07:00:00_pm,21.34
 27.0,choco,27800.0,unguia,27800001.0,balboa_(unguia_-_choco),2020.0,6.0,15360.0,6198.0,79.4,sabado,06/27/2020_07:45:00_pm,21.56
 27.0,choco,27800.0,unguia,27800005.0,titumate_(unguia_-_choco),2020.0,6.0,11312.0,3830.0,69.34,lunes,06/08/2020_07:30:00_pm,4.34
 27.0,choco,27800.0,unguia,27800000.0,unguia_(unguia_-_choco),2020.0,6.0,278054.0,96750.0,844.8,lunes,06/08/2020_08:15:00_pm,5.21
