@@ -1,24 +1,8 @@
-#----- Proyecto: Análisis de Datos de Zonas Horarias -----
-# Este script realiza un análisis estadístico y visualización de datos de estabilidad de servicio energético
-# en diferentes zonas horarias. Se enfoca en la columna 'PROMEDIO DIARIO EN HORAS'.
-# 1. Yaneth Berrio, 2. Santiago Quiroga, 3. Jose Luis Giraldo, 4. Sebastián Cortes, 5. Andrés Felipe Gutiérrez
-# main.py
-# main.py
-
 # main.py
 """
-Proyecto: Análisis de Datos de Zonas Horarias
-Autoría: Equipo (Yaneth Berrio, Santiago Quiroga, Jose Luis Giraldo, Sebastián Cortés, Andrés Felipe Gutiérrez)
-Descripción:
-    • Carga limpia y robusta del dataset Zonas_limpio.csv
-    • Estadísticas descriptivas clave
-    • Visualizaciones solicitadas (boxplot, histograma, pie, barras, mapa de calor, dispersión, regresión lineal)
-    • Manejo de errores: codificación, delimitador, encabezados faltantes
-"""
-# main.py
-"""
-Proyecto: Análisis de Datos de Zonas Horarias
-Versión: carga adaptable a separadores
+Proyecto: Análisis de Datos de Zonas Horarias – Filtro dinámico
+Permite filtrar por ID de municipio (M) o ID de departamento (D) y generar
+estadísticas + gráficas solo para el subconjunto elegido.
 """
 
 import pandas as pd
@@ -31,102 +15,67 @@ from graficas import (
     graficar_histograma, graficar_barras_categoria, graficar_matriz_correlacion,
     graficar_dispersion, graficar_regresion_lineal)
 
-# -----------------------------------------------------------------------------
-# 1. Carga adaptativa del CSV --------------------------------------------------
-# -----------------------------------------------------------------------------
-
 RUTA = "Zonas_limpio.csv"
 
-# intentos con diferentes configuraciones
-def cargar_csv(path: str) -> pd.DataFrame:
-    # 1) intento estándar ';' + latin1 + engine c
-    try:
-        df = pd.read_csv(path, sep=';', encoding='latin1')
-        if df.shape[1] > 1:
-            return df
-    except Exception:
-        pass
-    # 2) mismo pero engine python (tolerante)
-    try:
-        df = pd.read_csv(path, sep=';', encoding='latin1', engine='python')
-        if df.shape[1] > 1:
-            return df
-    except Exception:
-        pass
-    # 3) probar coma
-    try:
-        df = pd.read_csv(path, sep=',', encoding='latin1')
-        if df.shape[1] > 1:
-            return df
-    except Exception:
-        pass
-    # 4) engine python con coma
-    return pd.read_csv(path, sep=',', encoding='latin1', engine='python')
+# --------------------- Carga robusta -----------------------------------------
+with open(RUTA, "r", encoding="latin1") as f:
+    sep = ";" if ";" in f.readline() else ","
 
-try:
-    df = cargar_csv(RUTA)
-except FileNotFoundError:
-    raise SystemExit(f"❌ No se encontró el archivo {RUTA}.")
-
-# Normalizar encabezados y texto
+df = pd.read_csv(RUTA, sep=sep, encoding="latin1")
 df = normalizar_dataset(df)
+if "id_depatamento" in df.columns:
+    df = df.rename(columns={"id_depatamento": "id_departamento"})
 
-# Renombrar error tipográfico
-if 'id_depatamento' in df.columns:
-    df = df.rename(columns={'id_depatamento': 'id_departamento'})
+print("\n--- Caracterización de Datos ---")
+print("Filas, Columnas:", df.shape)
+print(df.isnull().sum())
 
-print("--- Caracterización de Datos ---")
-print("Tamaño total de datos (celdas):", df.size)
-print("Valores nulos por columna:", df.isnull().sum())
-
-if 'id_municipio' in df.columns:
-    print("Número de municipios únicos:", df['id_municipio'].nunique())
-else:
-    print("⚠️  Columna 'id_municipio' ausente. Encabezados:", df.columns.tolist())
-
-# -----------------------------------------------------------------------------
-# 2. Estadísticas --------------------------------------------------------------
-# -----------------------------------------------------------------------------
-col_horas = 'promedio_diario_en_horas'
+# --------------------- Filtro dinámico --------------------------------------
+col_horas = "promedio_diario_en_horas"
 if col_horas not in df.columns:
-    raise KeyError(f"No existe '{col_horas}'. Encabezados actuales: {df.columns.tolist()}")
+    raise KeyError("Columna promedio_diario_en_horas ausente")
 
-filtro = (df[col_horas] > 0) & (df[col_horas] <= 24)
-if filtro.sum() == 0:
-    raise ValueError('No hay registros con horas 0<<=24')
+modo = input("¿Filtrar por municipio (M) o departamento (D)? [M/D]: ").strip().upper()
 
-df_filtrado = df[filtro]
-
-print(df.columns)
-
-df_filtro_mun = df[df['id_municipio'] == 27745]
-
-print(f"--- Estadísticas de '{col_horas} ' ---")
-mostrar_promedio(df_filtro_mun, col_horas)
-mostrar_promedio(df_filtrado, col_horas)
-mostrar_mediana(df_filtrado, col_horas)
-mostrar_varianza(df_filtrado, col_horas)
-mostrar_desviacion_estandar(df_filtrado, col_horas)
-mostrar_percentiles(df_filtrado, col_horas)
-posicion_percentil(df_filtrado, col_horas, valor=5)
-
-# -----------------------------------------------------------------------------
-# 3. Visualizaciones -----------------------------------------------------------
-# -----------------------------------------------------------------------------
-
-#graficar_distribucion_normal(df_filtrado, col_horas)
-#graficar_promedio(df_filtrado, col_horas)
-graficar_promedio(df_filtro_mun, col_horas)
-#graficar_boxplot(df_filtrado, col_horas)
-#graficar_histograma(df_filtrado, col_horas)
-#graficar_barras_categoria(df_filtrado, col_horas)
-
-num_cols = [c for c in ['energia_activa', 'energia_reactiva', 'potencia_maxima', col_horas] if c in df_filtrado.columns]
-if len(num_cols) >= 2:
-    graficar_matriz_correlacion(df_filtrado, num_cols)
-    if {'potencia_maxima', col_horas}.issubset(df_filtrado.columns):
-        graficar_dispersion(df_filtrado, 'potencia_maxima', col_horas)
-    if {col_horas, 'energia_activa'}.issubset(df_filtrado.columns):
-        graficar_regresion_lineal(df_filtrado, col_horas, 'energia_activa')
+if modo == "M":
+    id_mun = int(input("ID municipio: "))
+    df_sel = df[df["id_municipio"] == id_mun]
+    if df_sel.empty:
+        raise ValueError("Municipio no encontrado")
+    nombre_filtro = df_sel["municipio"].iloc[0].replace("_", " ").title()
 else:
-    print('⚠️  No hay suficientes columnas numéricas para correlación/regresión.')
+    id_dep = int(input("ID departamento: "))
+    df_sel = df[df["id_departamento"] == id_dep]
+    if df_sel.empty:
+        raise ValueError("Departamento no encontrado")
+    nombre_filtro = df_sel["departamento"].iloc[0].replace("_", " ").title()
+
+# Filtrar horas válidas
+mask = (df_sel[col_horas] > 0) & (df_sel[col_horas] <= 24)
+df_fil = df_sel[mask]
+
+print(f"\n--- Estadísticas para {nombre_filtro} ---")
+mostrar_promedio(df_fil, col_horas)
+mostrar_mediana(df_fil, col_horas)
+mostrar_varianza(df_fil, col_horas)
+mostrar_desviacion_estandar(df_fil, col_horas)
+mostrar_percentiles(df_fil, col_horas)
+posicion_percentil(df_fil, col_horas, 5)
+
+# --------------------- Gráficas ---------------------------------------------
+
+graficar_distribucion_normal(df_fil, col_horas)
+graficar_promedio(df_fil, col_horas)
+graficar_boxplot(df_fil, col_horas)
+graficar_histograma(df_fil, col_horas)
+graficar_barras_categoria(df_fil, col_horas)
+
+vars_num = [v for v in ["energia_activa", "energia_reactiva", "potencia_maxima", col_horas] if v in df_fil.columns]
+if len(vars_num) >= 2:
+    graficar_matriz_correlacion(df_fil, vars_num)
+    if {"potencia_maxima", col_horas}.issubset(df_fil.columns):
+        graficar_dispersion(df_fil, "potencia_maxima", col_horas)
+    if {col_horas, "energia_activa"}.issubset(df_fil.columns):
+        graficar_regresion_lineal(df_fil, col_horas, "energia_activa")
+else:
+    print("⚠️  Insuficientes variables numéricas para correlación/regresión")
