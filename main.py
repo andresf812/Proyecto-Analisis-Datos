@@ -104,7 +104,7 @@ df_filtro_mun = df[(df['id_municipio'] == 27745) & (df['ano_servicio'].between(2
 
 print(f"--- Estadísticas de '{col_horas} ' ---")
 mostrar_max(df_filtro_mun, col_horas)
-mostrar_min(df_filtro_mun, col_horas)
+mostrar_min(df_filtrado, col_horas)
 mostrar_promedio(df_filtrado, col_horas)
 mostrar_mediana(df_filtrado, col_horas)
 mostrar_varianza(df_filtrado, col_horas)
