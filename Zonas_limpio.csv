@@ -1630,7 +1630,7 @@ id_depatamento,departamento,id_municipio,municipio,id_localidad,localidad,ano_se
 86.0,putumayo,86573.0,puerto_leguizamo,86573000.0,puerto_leguizamo_(puerto_leguizamo_-_putumayo),2022.0,9.0,959940.0,304085.0,2135.14,viernes,09/23/2022_03:30:00_pm,23.43
 86.0,putumayo,86573.0,puerto_leguizamo,86573009.0,pinuna_negro_(puerto_leguizamo_-_putumayo),2022.0,9.0,3708.0,2091.0,25.6,viernes,09/02/2022_08:00:00_pm,6.33
 88.0,archipielago_de_san_andres_y_providencia,88001.0,san_andres,88001000.0,san_andres_(san_andres_-_archipielago_de_san_andres_y_providencia),2022.0,9.0,17931302.0,4819644.0,31821.09,viernes,09/09/2022_03:30:00_pm,24.0
-88.0,archipielago_de_san_andres_y_providencia,88564.0,providencia,88564000.0,providencia_(providencia_-_archipielago_de_san_andres_y_providencia),2022.0,9.0,1218944.0,286044.0,2037.47,viernes,09/09/2022_08:30:00_pm,24.0
+88.0,archipielago_de_san_andres_y_providencia,88564.0,providencia,88564000.0,providencia_(providencia_-_archipielago_de_san_andres_y_providencia_),2022.0,9.0,1218944.0,286044.0,2037.47,viernes,09/09/2022_08:30:00_pm,24.0
 91.0,amazonas,91001.0,leticia,91001000.0,leticia_(leticia_-_amazonas),2022.0,9.0,4131474.0,1207187.0,8470.67,jueves,09/29/2022_02:45:00_pm,24.0
 91.0,amazonas,91540.0,puerto_narino,91540000.0,puerto_narino_(puerto_narino_-_amazonas),2022.0,9.0,119999.0,42831.0,255.38,miercoles,09/28/2022_06:30:00_pm,24.0
 91.0,amazonas,91798.0,tarapaca_(anm),91798000.0,tarapaca_(tarapaca_(anm)_-_amazonas),2022.0,9.0,25029.0,11173.0,97.27,miercoles,09/21/2022_06:00:00_pm,10.31
@@ -1724,8 +1724,8 @@ id_depatamento,departamento,id_municipio,municipio,id_localidad,localidad,ano_se
 91.0,amazonas,91540.0,puerto_narino,91540000.0,puerto_narino_(puerto_narino_-_amazonas),2022.0,7.0,113898.0,40781.62,233.73,martes,07/12/2022_07:15:00_pm,23.97
 91.0,amazonas,91798.0,tarapaca,91798000.0,tarapaca_(tarapaca_-_amazonas),2022.0,7.0,24254.0,10571.1,90.29,martes,07/12/2022_02:00:00_pm,10.45
 5.0,antioquia,5873.0,vigia_del_fuerte,5873002.0,vegaez_(vigia_del_fuerte_-_antioquia),2022.0,7.0,3567.0,393.35,35.81,lunes,07/11/2022_09:00:00_pm,4.95
-88.0,archipielago_de_san_andres,88564.0,providencia,88564000.0,providencia_(providencia_-_archipielago_de_san_andres),2022.0,7.0,1239766.0,292504.0,2145.96,lunes,07/18/2022_09:15:00_pm,24.0
-88.0,archipielago_de_san_andres,88001.0,san_andres,88001000.0,san_andres_(san_andres_-_archipielago_de_san_andres),2022.0,7.0,18451819.0,4321949.0,30617.96,miercoles,07/13/2022_03:30:00_pm,24.0
+88.0,archipielago_de_san_andres_y_providencia,88564.0,providencia,88564000.0,providencia_(providencia_-_archipielago_de_san_andres_y_providencia_),2022.0,7.0,1239766.0,292504.0,2145.96,lunes,07/18/2022_09:15:00_pm,24.0
+88.0,archipielago_de_san_andres_y_providencia,88001.0,san_andres,88001000.0,san_andres_(san_andres_-_archipielago_de_san_andres_y_providencia),2022.0,7.0,18451819.0,4321949.0,30617.96,miercoles,07/13/2022_03:30:00_pm,24.0
 13.0,bolivar,13001.0,cartagena,13001037.0,isla_fuerte_(cartagena_-_bolivar),2022.0,7.0,55920.0,26451.99,200.2,domingo,07/03/2022_10:45:00_pm,12.87
 13.0,bolivar,13001.0,cartagena,13001037.0,isla_mucura_(cartagena_-_bolivar),2022.0,7.0,7101.0,2763.42,22.85,sabado,07/09/2022_11:00:00_pm,14.75
 13.0,bolivar,13001.0,cartagena,13001037.0,santa_cruz_del_islote_(cartagena_-_bolivar),2022.0,7.0,14090.0,4483.02,40.42,domingo,07/17/2022_09:00:00_pm,14.35
@@ -1798,8 +1798,8 @@ id_depatamento,departamento,id_municipio,municipio,id_localidad,localidad,ano_se
 91.0,amazonas,91540.0,puerto_narino,91540000.0,puerto_narino_(puerto_narino_-_amazonas),2022.0,6.0,104812.0,36619.0,224.2,jueves,06/30/2022_06:45:00_pm,23.95
 91.0,amazonas,91798.0,tarapaca,91798000.0,tarapaca_(tarapaca_-_amazonas),2022.0,6.0,22160.0,10472.0,89.0,martes,06/21/2022_02:45:00_pm,10.43
 5.0,antioquia,5873.0,vigia_del_fuerte,5873002.0,vegaez_(vigia_del_fuerte_-_antioquia),2022.0,6.0,4622.0,545.0,41.6,martes,06/21/2022_05:15:00_pm,6.45
-88.0,archipielago_de_san_andres,88564.0,providencia,88564000.0,providencia_(providencia_-_archipielago_de_san_andres),2022.0,6.0,1056205.0,261734.0,1983.3,miercoles,06/29/2022_09:15:00_pm,24.0
-88.0,archipielago_de_san_andres,88001.0,san_andres,88001000.0,san_andres_(san_andres_-_archipielago_de_san_andres),2022.0,6.0,16330600.0,4428871.0,29697.1,miercoles,06/08/2022_03:30:00_pm,24.0
+88.0,archipielago_de_san_andres_y_providencia,88564.0,providencia,88564000.0,providencia_(providencia_-_archipielago_de_san_andres_y_providencia_),2022.0,6.0,1056205.0,261734.0,1983.3,miercoles,06/29/2022_09:15:00_pm,24.0
+88.0,archipielago_de_san_andres_y_providencia,88001.0,san_andres,88001000.0,san_andres_(san_andres_-_archipielago_de_san_andres_y_providencia),2022.0,6.0,16330600.0,4428871.0,29697.1,miercoles,06/08/2022_03:30:00_pm,24.0
 13.0,bolivar,13001.0,cartagena,13001037.0,isla_fuerte_(cartagena_-_bolivar),2022.0,6.0,52039.0,24778.0,179.3,jueves,06/23/2022_11:00:00_pm,12.68
 13.0,bolivar,13001.0,cartagena,13001037.0,isla_mucura_(cartagena_-_bolivar),2022.0,6.0,6662.0,2473.0,23.7,jueves,06/23/2022_10:00:00_pm,13.98
 13.0,bolivar,13001.0,cartagena,13001037.0,santa_cruz_del_islote_(cartagena_-_bolivar),2022.0,6.0,12585.0,3947.0,38.4,miercoles,06/29/2022_09:30:00_pm,13.73
@@ -1874,8 +1874,8 @@ id_depatamento,departamento,id_municipio,municipio,id_localidad,localidad,ano_se
 91.0,amazonas,91540.0,puerto_narino,91540000.0,puerto_narino_(puerto_narino_-_amazonas),2022.0,5.0,110906.0,39659.0,224.4,miercoles,05/11/2022_06:30:00_pm,24.0
 91.0,amazonas,91798.0,tarapaca,91798000.0,tarapaca_(tarapaca_-_amazonas),2022.0,5.0,23816.0,10652.0,88.13,lunes,05/09/2022_07:00:00_pm,10.43
 5.0,antioquia,5873.0,vigia_del_fuerte,5873002.0,vegaez_(vigia_del_fuerte_-_antioquia),2022.0,5.0,3577.0,478.0,34.21,domingo,05/01/2022_07:45:00_pm,6.12
-88.0,archipielago_de_san_andres,88564.0,providencia,88564000.0,providencia_(providencia_-_archipielago_de_san_andres),2022.0,5.0,1125939.0,278914.0,1888.11,jueves,05/26/2022_08:45:00_pm,24.0
-88.0,archipielago_de_san_andres,88001.0,san_andres,88001000.0,san_andres_(san_andres_-_archipielago_de_san_andres),2022.0,5.0,17797916.0,4720668.0,30430.83,martes,05/10/2022_03:30:00_pm,24.0
+88.0,archipielago_de_san_andres_y_providencia,88564.0,providencia,88564000.0,providencia_(providencia_-_archipielago_de_san_andres_y_providencia_),2022.0,5.0,1125939.0,278914.0,1888.11,jueves,05/26/2022_08:45:00_pm,24.0
+88.0,archipielago_de_san_andres_y_providencia,88001.0,san_andres,88001000.0,san_andres_(san_andres_-_archipielago_de_san_andres_y_providencia),2022.0,5.0,17797916.0,4720668.0,30430.83,martes,05/10/2022_03:30:00_pm,24.0
 13.0,bolivar,13001.0,cartagena,13001037.0,isla_mucura_(cartagena_-_bolivar),2022.0,5.0,7082.0,2825.0,22.34,martes,05/17/2022_09:45:00_pm,14.62
 13.0,bolivar,13001.0,cartagena,13001037.0,santa_cruz_del_islote_(cartagena_-_bolivar),2022.0,5.0,13696.0,4346.0,38.78,martes,05/10/2022_09:45:00_pm,14.18
 18.0,caqueta,18753.0,san_vicente_del_caguan,18753002.0,guacamayas_(san_vicente_del_caguan_-_caqueta),2022.0,5.0,12550.0,3979.0,41.23,sabado,05/21/2022_07:30:00_pm,15.43
@@ -1950,8 +1950,8 @@ id_depatamento,departamento,id_municipio,municipio,id_localidad,localidad,ano_se
 91.0,amazonas,91540.0,puerto_narino,91540000.0,puerto_narino_(puerto_narino_-_amazonas),2022.0,4.0,111006.0,38389.0,240.59,martes,04/05/2022_06:45:00_pm,23.9
 91.0,amazonas,91798.0,tarapaca,91798000.0,tarapaca_(tarapaca_-_amazonas),2022.0,4.0,20700.0,9568.0,82.64,sabado,04/09/2022_06:30:00_pm,9.62
 5.0,antioquia,5873.0,vigia_del_fuerte,5873002.0,vegaez_(vigia_del_fuerte_-_antioquia),2022.0,4.0,1236.0,191.0,47.07,jueves,04/21/2022_09:45:00_am,1.4
-88.0,archipielago_de_san_andres,88564.0,providencia,88564000.0,providencia_(providencia_-_archipielago_de_san_andres),2022.0,4.0,1063832.0,268820.0,1812.35,miercoles,04/06/2022_08:45:00_pm,24.0
-88.0,archipielago_de_san_andres,88001.0,san_andres,88001000.0,san_andres_(san_andres_-_archipielago_de_san_andres),2022.0,4.0,17357143.0,4666990.0,30191.03,miercoles,04/06/2022_03:30:00_pm,24.0
+88.0,archipielago_de_san_andres_y_providencia,88564.0,providencia,88564000.0,providencia_(providencia_-_archipielago_de_san_andres_y_providencia_),2022.0,4.0,1063832.0,268820.0,1812.35,miercoles,04/06/2022_08:45:00_pm,24.0
+88.0,archipielago_de_san_andres_y_providencia,88001.0,san_andres,88001000.0,san_andres_(san_andres_-_archipielago_de_san_andres_y_providencia),2022.0,4.0,17357143.0,4666990.0,30191.03,miercoles,04/06/2022_03:30:00_pm,24.0
 13.0,bolivar,13001.0,cartagena,13001037.0,isla_mucura_(cartagena_-_bolivar),2022.0,4.0,6932.0,2677.0,21.86,sabado,04/30/2022_01:00:00_am,14.83
 13.0,bolivar,13001.0,cartagena,13001037.0,santa_cruz_del_islote_(cartagena_-_bolivar),2022.0,4.0,13261.0,4326.0,39.62,lunes,04/11/2022_10:00:00_pm,14.3
 18.0,caqueta,18753.0,san_vicente_del_caguan,18753002.0,guacamayas_(san_vicente_del_caguan_-_caqueta),2022.0,4.0,14240.0,4925.0,39.82,jueves,04/21/2022_07:00:00_pm,17.67
