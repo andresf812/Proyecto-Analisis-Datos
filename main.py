@@ -27,7 +27,8 @@ from graficas import (
     graficar_boxplot_promedio_municipio,
     graficar_violin_promedio_municipio,
     graficar_diagrama_dispersion,
-    graficar_promedio_pie_municipio
+    graficar_promedio_pie_municipio,
+    graficar_promedio_histograma_anio
 )
 
 
@@ -100,10 +101,12 @@ graficar_diagrama_dispersion(df_fil, "energia_reactiva", "energia_activa")
 
 
 
-####grafico_promedio_pie por municipio
+#grafico_promedio_pie por municipio
 graficar_promedio_pie_municipio(df_fil, "energia_activa", "departamento")
 
-####grafico_promedio_histograma por municipio
+#grafico_promedio_histograma por año
+graficar_promedio_histograma_anio(df_fil, "ano_servicio", col_horas)
+
 
 ####modelo de regresion lineal por municipio
 
@@ -114,6 +117,8 @@ graficar_barras_promedio_municipio(df_fil, col_horas, "municipio")
 graficar_boxplot_promedio_municipio(df_fil, col_horas, "municipio")
 #graficas violin
 graficar_violin_promedio_municipio(df_fil, col_horas, "municipio")
+
+
 
 # vars_num = [v for v in ["energia_activa", "energia_reactiva", "potencia_maxima", col_horas] if v in df_fil.columns]
 # if len(vars_num) >= 2:

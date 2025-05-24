@@ -156,3 +156,27 @@ def graficar_promedio_pie_municipio(df, col_horas, col_municipio):
     plt.legend(wedges, promedios.index, title="Municipio", bbox_to_anchor=(1.05, 1), loc="upper left")
     plt.savefig(f'promedio_{col_horas}_pie_municipio.png', bbox_inches='tight')
     print(f"✅ Gráfica guardada como 'promedio_{col_horas}_pie_municipio.png'")
+
+def graficar_promedio_histograma_municipio_anio(df, col_horas, col_municipio, col_anio):
+    promedios = df.groupby([col_municipio, col_anio])[col_horas].mean()
+    plt.figure(figsize=(8, 6))
+    plt.hist(promedios, bins=10, color='skyblue', edgecolor='black')
+    plt.title(f'Histograma del promedio de {col_horas} por municipio y año')
+    plt.xlabel(f'Promedio de {col_horas}')
+    plt.ylabel('Cantidad de municipio-año')
+    plt.grid(True)
+    plt.tight_layout()
+    plt.savefig(f'histograma_promedio_{col_horas}_por_municipio_anio.png')
+    print(f"✅ Histograma guardado como 'histograma_promedio_{col_horas}_por_municipio_anio.png'")
+
+def graficar_promedio_histograma_anio(df, col_horas, col_anio):
+    promedios = df.groupby(col_anio)[col_horas].mean()
+    plt.figure(figsize=(8, 6))
+    plt.hist(promedios, bins=len(promedios), color='skyblue', edgecolor='black')
+    plt.title(f'Histograma del promedio de {col_horas} por año')
+    plt.xlabel(f'Promedio de {col_horas}')
+    plt.ylabel('Cantidad de años')
+    plt.grid(True)
+    plt.tight_layout()
+    plt.savefig(f'histograma_promedio_{col_horas}_por_anio.png')
+    print(f"✅ Histograma guardado como 'histograma_promedio_{col_horas}_por_anio.png'")
