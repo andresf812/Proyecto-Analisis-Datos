@@ -28,7 +28,7 @@ from graficas import (
     graficar_violin_promedio_municipio,
     graficar_diagrama_dispersion,
     graficar_promedio_pie_municipio,
-    graficar_promedio_histograma_anio
+    graficar_histograma_anio
 )
 
 
@@ -105,7 +105,7 @@ graficar_diagrama_dispersion(df_fil, "energia_reactiva", "energia_activa")
 graficar_promedio_pie_municipio(df_fil, "energia_activa", "departamento")
 
 #grafico_promedio_histograma por año
-graficar_promedio_histograma_anio(df_fil, "ano_servicio", col_horas)
+graficar_histograma_anio(df_fil, col_horas, "ano_servicio")
 
 
 ####modelo de regresion lineal por municipio
