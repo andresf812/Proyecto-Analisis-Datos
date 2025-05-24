@@ -194,55 +194,44 @@ def graficar_histograma_anio(df, col_horas, col_anio):
     plt.savefig(f'histograma_{col_horas}_por_anio.png')
     print(f"✅ Gráfica guardada como 'promedio_histograma_{col_horas}_por_anio.png'")
 
+
 def graficar_regresion_lineal_por_municipio(
-        df,
+        df: pd.DataFrame,
         x_col: str = "ano_servicio",
         y_col: str = "promedio_diario_en_horas",
         municipio_col: str = "municipio",
         *,
         min_puntos: int = 3,
+        top_n_lowest: int | None = None,          # ⬅️  nuevo
         municipios_a_mostrar: list[str] | None = None,
         guardar: bool = True,
         nombre_archivo: str | None = None,
 ) -> None:
     """
-    Dibuja la regresión lineal Y vs X para cada municipio que posea
-    al menos `min_puntos` registros y más de un valor distinto en X.
-    No genera gráficos adicionales.
+    Dibuja la regresión lineal Y vs X para cada municipio seleccionado.
+    Si `top_n_lowest` se proporciona, se grafican únicamente los N municipios
+    con menor promedio en `y_col`.
 
-    Parámetros
-    ----------
-    df : pandas.DataFrame
-        Datos de entrada.
-    x_col : str
-        Columna independiente numérica (p. ej. 'ano_servicio').
-    y_col : str
-        Columna dependiente numérica (p. ej. 'promedio_diario_en_horas').
-    municipio_col : str
-        Columna categórica con el nombre del municipio.
-    min_puntos : int
-        Mínimo de observaciones por municipio para ajustar la recta.
-    municipios_a_mostrar : list[str] | None
-        Lista opcional con municipios concretos que se desean graficar.
-    guardar : bool
-        True → guarda el PNG; False → lo muestra en pantalla.
-    nombre_archivo : str | None
-        Nombre personalizado del PNG (si `guardar=True`).
+    Otros parámetros idénticos a la versión anterior.
     """
 
-    # ──────────── Selección de municipios ────────────
-    if municipios_a_mostrar is None:
-        municipios_iter = df[municipio_col].unique()
-    else:
+    # ────────── 1. Selección automática de municipios “críticos” ──────────
+    if top_n_lowest is not None:
+        promedios = (df.groupby(municipio_col)[y_col]
+                     .mean()
+                     .sort_values()
+                     .head(top_n_lowest))
+        municipios_iter = promedios.index.tolist()
+    elif municipios_a_mostrar is not None:
         municipios_iter = municipios_a_mostrar
+    else:
+        municipios_iter = df[municipio_col].unique()
 
-    # ──────────── Gráfico base ───────────────────────
+    # ────────── 2. Gráfico base ───────────────────────────────────────────
     plt.figure(figsize=(10, 7))
 
     for mpio in municipios_iter:
         datos = df[df[municipio_col] == mpio][[x_col, y_col]].dropna()
-
-        # Filtrado: suficientes puntos y X no constante
         if len(datos) < min_puntos:
             continue
         x_vals = datos[x_col].values
@@ -250,25 +239,26 @@ def graficar_regresion_lineal_por_municipio(
         if np.unique(x_vals).size < 2:
             continue
 
-        # Ajuste de regresión
-        slope, intercept, r, *_ = linregress(x_vals, y_vals)
+        slope, intercept, *_ = linregress(x_vals, y_vals)
 
-        # Puntos y recta
         plt.scatter(x_vals, y_vals, alpha=0.6, label=f"{mpio} (β={slope:.2f})")
         x_line = np.linspace(x_vals.min(), x_vals.max(), 100)
         plt.plot(x_line, slope * x_line + intercept)
 
-    # Etiquetas y formato
+    # ────────── 3. Etiquetas, guardado o visualización ───────────────────
     plt.xlabel(x_col.replace("_", " ").title())
     plt.ylabel(y_col.replace("_", " ").title())
-    plt.title(f"Regresión lineal de {y_col} vs {x_col} por municipio")
+    plt.title(f"Regresión lineal de {y_col} vs {x_col}\n"
+              f"(Top {top_n_lowest} municipios con menor promedio)" if top_n_lowest
+              else f"Regresión lineal de {y_col} vs {x_col} por municipio")
     plt.legend(bbox_to_anchor=(1.04, 1), loc="upper left", fontsize=7)
     plt.tight_layout()
 
-    # Guardar o mostrar
     if guardar:
         if nombre_archivo is None:
-            nombre_archivo = f"regresion_lineal_{y_col}_vs_{x_col}_por_municipio.png"
+            sufijo = f"_top{top_n_lowest}" if top_n_lowest else ""
+            nombre_archivo = (f"regresion_lineal_{y_col}_vs_{x_col}"
+                              f"_por_municipio{sufijo}.png")
         plt.savefig(nombre_archivo, dpi=150, bbox_inches="tight")
         print(f"✅ Gráfica guardada como '{nombre_archivo}'")
     else:

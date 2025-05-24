@@ -112,7 +112,8 @@ graficar_regresion_lineal_por_municipio(
     y_col="promedio_diario_en_horas",
     municipio_col="municipio",
     min_puntos=3,
-    guardar=True          # True = guardar PNG; False = solo mostrar
+    top_n_lowest=10,   # ⬅️  solo los 10 municipios con menor promedio
+    guardar=True
 )
 
 #grafica por barras
