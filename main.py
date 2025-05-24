@@ -18,7 +18,10 @@ from estadisticas import (
 from graficas import (
     graficar_distribucion_normal, graficar_promedio, graficar_boxplot,
     graficar_histograma, graficar_barras_categoria, graficar_matriz_correlacion,
-    graficar_dispersion, graficar_regresion_lineal)
+    graficar_dispersion, graficar_regresion_lineal,
+        graficar_barras_promedio_municipio,
+    graficar_boxplot_promedio_municipio,
+    graficar_violin_promedio_municipio,graficar_diagrama_dispersion)
 
 RUTA = "Zonas_limpio.csv"
 
@@ -68,23 +71,43 @@ if descripcion:
     print(f"🔎 Análisis: {descripcion}")
 print(f"--- Estadísticas para {nombre_filtro} ---")
 print("========================================================")
+#########falta valor de la moda, maximo y  minimo
 mostrar_promedio(df_fil, col_horas)
+#valor de la media
 mostrar_mediana(df_fil, col_horas)
+#valor de la varianza
 mostrar_varianza(df_fil, col_horas)
+#valor desviacion estandar
 mostrar_desviacion_estandar(df_fil, col_horas)
+#cuartiles
 mostrar_percentiles(df_fil, col_horas)
-posicion_percentil(df_fil, col_horas, 5)
+
 
 # --------------------- Gráficas ---------------------------------------------
 
-graficar_distribucion_normal(df_fil, col_horas)
-graficar_promedio(df_fil, col_horas)
-graficar_boxplot(df_fil, col_horas)
-graficar_histograma(df_fil, col_horas)
+# graficar_distribucion_normal(df_fil, col_horas)
+# graficar_promedio(df_fil, col_horas)
+# graficar_boxplot(df_fil, col_horas)
+# graficar_histograma(df_fil, col_horas)
 graficar_barras_categoria(df_fil, col_horas)
+####graficar_diagrama_dispersion por municipio
+
+####grafico_promedio_pie por municipio
+
+####grafico_promedio_histograma por municipio
+
+####modelo de regresion lineal por municipio
+
+
+#grafica por barras
+graficar_barras_promedio_municipio(df_fil, col_horas, "municipio")
+#graficas cajas y bigotes 
+graficar_boxplot_promedio_municipio(df_fil, col_horas, "municipio")
+graficar_violin_promedio_municipio(df_fil, col_horas, "municipio")
 
 vars_num = [v for v in ["energia_activa", "energia_reactiva", "potencia_maxima", col_horas] if v in df_fil.columns]
 if len(vars_num) >= 2:
+    ######mapa de calor por municipio 
     graficar_matriz_correlacion(df_fil, vars_num)
     if {"potencia_maxima", col_horas}.issubset(df_fil.columns):
         graficar_dispersion(df_fil, "potencia_maxima", col_horas)

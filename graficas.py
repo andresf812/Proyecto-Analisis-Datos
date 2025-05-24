@@ -6,7 +6,7 @@ import pandas as pd
 import seaborn as sns
 from scipy.stats import norm, linregress
 
-def graficar_distribucion_normal(df, col):
+def graficar_diagrama_dispersion(df, col):
     datos = df[col].dropna()
     media = datos.mean()
     std = datos.std()
@@ -24,7 +24,7 @@ def graficar_distribucion_normal(df, col):
     plt.savefig(f'{col}_distribucion.png')
     print(f"✅ Gráfica guardada como '{col}_distribucion.png'")
 
-def graficar_promedio(df, col):
+def graficar_pie(df, col):
     plt.figure(figsize=(8, 8))
     valores = df[col].value_counts().head(10)
     etiquetas = valores.index.astype(str)
@@ -100,3 +100,37 @@ def graficar_regresion_lineal(df, x_col, y_col):
     plt.grid(True)
     plt.savefig(f'regresion_{x_col}_vs_{y_col}.png')
     print(f"✅ Regressión lineal guardada como 'regresion_{x_col}_vs_{y_col}.png'")
+
+def graficar_barras_promedio_municipio(df, col_horas, col_municipio):
+    promedios = df.groupby(col_municipio)[col_horas].mean().sort_values()
+    plt.figure(figsize=(12, 6))
+    promedios.plot(kind='bar', color='skyblue')
+    plt.title(f'Promedio de {col_horas} por municipio')
+    plt.xlabel('Municipio')
+    plt.ylabel(f'Promedio de {col_horas}')
+    plt.xticks(rotation=45, ha='right')
+    plt.tight_layout()
+    plt.savefig(f'promedio_{col_horas}_por_municipio.png')
+    print(f"✅ Gráfica guardada como 'promedio_{col_horas}_por_municipio.png'")
+
+def graficar_boxplot_promedio_municipio(df, col_horas, col_municipio):
+    plt.figure(figsize=(12, 6))
+    sns.boxplot(x=col_municipio, y=col_horas, data=df)
+    plt.title(f'Boxplot de {col_horas} por municipio')
+    plt.xlabel('Municipio')
+    plt.ylabel(f'{col_horas}')
+    plt.xticks(rotation=45, ha='right')
+    plt.tight_layout()
+    plt.savefig(f'boxplot_{col_horas}_por_municipio.png')
+    print(f"✅ Gráfica guardada como 'boxplot_{col_horas}_por_municipio.png'")
+
+def graficar_violin_promedio_municipio(df, col_horas, col_municipio):
+    plt.figure(figsize=(12, 6))
+    sns.violinplot(x=col_municipio, y=col_horas, data=df)
+    plt.title(f'Violin plot de {col_horas} por municipio')
+    plt.xlabel('Municipio')
+    plt.ylabel(f'{col_horas}')
+    plt.xticks(rotation=45, ha='right')
+    plt.tight_layout()
+    plt.savefig(f'violin_{col_horas}_por_municipio.png')
+    print(f"✅ Gráfica guardada como 'violin_{col_horas}_por_municipio.png'")
