@@ -528,6 +528,7 @@ id_depatamento,departamento,id_municipio,municipio,id_localidad,localidad,ano_se
 19.0,cauca,19809.0,timbiqui,19809003.0,coteje_(timbiqui_-_cauca),2023.0,12.0,6198.0,4496.0,30.4,viernes,12/15/2023_08:15:00_pm,8.11
 19.0,cauca,19809.0,timbiqui,19809026.0,los_brazos_(timbiqui_-_cauca),2023.0,12.0,7459.0,3409.0,36.91,sabado,12/16/2023_07:45:00_pm,7.56
 19.0,cauca,19809.0,timbiqui,19809023.0,puerto_saija_(timbiqui_-_cauca),2023.0,12.0,27403.0,9243.0,182.86,domingo,12/24/2023_08:30:00_pm,6.15
+19.0,cauca,19809.0,timbiqui,19809007.0,san_jose_(timbiqui_-_cauca),2023.0,12.0,7195.0,4792.0,38.54,viernes,12/15/2023_06:45:00_pm,38.54
 19.0,cauca,19809.0,timbiqui,19809009.0,santa_rosa_de_saija_(timbiqui_-_cauca),2023.0,12.0,3561.0,1060.0,20.3,sabado,12/02/2023_07:15:00_pm,7.57
 27.0,choco,27006.0,acandi,27006000.0,acandi_(acandi_-_choco),2023.0,12.0,763985.0,225386.0,1559.01,martes,12/12/2023_09:30:00_pm,19.33
 27.0,choco,27006.0,acandi,27006007.0,san_francisco_(acandi_-_choco),2023.0,12.0,17019.0,7527.0,85.78,domingo,12/31/2023_07:00:00_pm,8.45
@@ -1048,7 +1049,7 @@ id_depatamento,departamento,id_municipio,municipio,id_localidad,localidad,ano_se
 91.0,amazonas,91001.0,leticia,91001000.0,leticia_(leticia_-_amazonas),2023.0,4.0,3757604.0,1047263.0,7680.68,miercoles,04/19/2023_02:30:00_pm,24.0
 91.0,amazonas,91540.0,puerto_narino,91540000.0,puerto_narino_(puerto_narino_-_amazonas),2023.0,4.0,115634.0,41170.0,234.61,martes,04/18/2023_08:00:00_pm,24.0
 91.0,amazonas,91798.0,tarapaca_(anm),91798000.0,tarapaca_(tarapaca_(anm)_-_amazonas),2023.0,4.0,27679.0,12805.0,116.73,viernes,04/14/2023_02:30:00_pm,10.15
-5.0,antioquia,5873.0,vigia_del_fuerte,5873002.0,vegaez_(vigia_del_fuerte_-_antioquia),2023.0,4.0,4117.0,807.0,52.7,sabado,04/22/2023_07:00:00_pm,
+5.0,antioquia,5873.0,vigia_del_fuerte,5873002.0,vegaez_(vigia_del_fuerte_-_antioquia),2023.0,4.0,4117.0,807.0,52.7,sabado,04/22/2023_07:00:00_pm,508.0
 95.0,guaviare,95200.0,miraflores,95200000.0,miraflores_(miraflores_-_guaviare),2023.0,4.0,80666.0,29742.0,199.32,martes,04/18/2023_06:15:00_pm,18.01
 13.0,bolivar,13001.0,cartagena_de_indias,13001007.0,isla_fuerte_(cartagena_de_indias_-_bolivar),2023.0,4.0,65449.0,38614.0,220.49,jueves,04/06/2023_11:45:00_pm,13.39
 13.0,bolivar,13001.0,cartagena_de_indias,13001037.0,isla_mucura_(cartagena_de_indias_-_bolivar),2023.0,4.0,4954.0,1982.0,19.71,viernes,04/07/2023_11:15:00_pm,11.2
@@ -2812,6 +2813,7 @@ id_depatamento,departamento,id_municipio,municipio,id_localidad,localidad,ano_se
 27.0,choco,27077.0,bajo_baudo_(pizarro),27077000.0,pizarro_(bajo_baudo_(pizarro)_-_choco),2021.0,6.0,192293.0,92453.0,373.82,jueves,06/03/2021_07:15:00_pm,23.59
 27.0,choco,27099.0,bojaya_(bellavista),27099000.0,bellavista_(bojaya_(bellavista)_-_choco),2021.0,6.0,89218.0,26542.0,246.51,martes,06/29/2021_07:30:00_pm,17.17
 27.0,choco,27099.0,bojaya_(bellavista),27099002.0,la_loma_de_bojaya_(bojaya_(bellavista)_-_choco),2021.0,6.0,12198.0,5787.0,57.6,martes,06/01/2021_02:15:00_pm,10.6
+27.0,choco,27099.0,bojaya_(bellavista),27099005.0,napipi_(bojaya_(bellavista)_-_choco),2021.0,6.0,11897.0,3596.0,60.8,miercoles,06/30/2021_08:45:00_pm,72.4
 27.0,choco,27099.0,bojaya_(bellavista),27099008.0,puerto_conto_(bojaya_(bellavista)_-_choco),2021.0,6.0,13748.0,3748.0,69.6,sabado,06/19/2021_07:30:00_pm,7.48
 27.0,choco,27250.0,el_litoral_del_san_juan,27250000.0,santa_genoveva_de_docordo_(el_litoral_del_san_juan_-_choco),2021.0,6.0,71708.0,39399.0,170.15,sabado,06/19/2021_11:30:00_pm,18.49
 27.0,choco,27372.0,jurado,27372000.0,jurado_(jurado_-_choco),2021.0,6.0,150303.0,68540.0,289.44,lunes,06/28/2021_07:30:00_pm,23.57
