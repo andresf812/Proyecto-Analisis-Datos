@@ -23,7 +23,10 @@ from graficas import (
     graficar_diagrama_dispersion,
     graficar_promedio_pie_municipio,
     graficar_histograma_anio,
-    graficar_regresion_lineal_por_municipio
+    graficar_regresion_lineal_por_municipio,
+    graficar_matriz_correlacion,
+    graficar_dispersion,
+    graficar_regresion_lineal
 )
 
 
@@ -122,13 +125,16 @@ graficar_barras_promedio_municipio(df_fil, col_horas, "municipio")
 graficar_boxplot_promedio_municipio(df_fil, col_horas, "municipio")
 #graficas violin
 
-# vars_num = [v for v in ["energia_activa", "energia_reactiva", "potencia_maxima", col_horas] if v in df_fil.columns]
-# if len(vars_num) >= 2:
-#     ######mapa de calor por municipio 
-#     graficar_matriz_correlacion(df_fil, vars_num)
-#     if {"potencia_maxima", col_horas}.issubset(df_fil.columns):
-#         graficar_dispersion(df_fil, "potencia_maxima", col_horas)
-#     if {col_horas, "energia_activa"}.issubset(df_fil.columns):
-#         graficar_regresion_lineal(df_fil, col_horas, "energia_activa")
-# else:
-#     print("⚠️  Insuficientes variables numéricas para correlación/regresión")
+#grafica de calor por municipio
+
+
+vars_num = [v for v in ["energia_activa", "energia_reactiva", "potencia_maxima", col_horas] if v in df_fil.columns]
+if len(vars_num) >= 2:
+    ######mapa de calor por municipio 
+    graficar_matriz_correlacion(df_fil, vars_num)
+    if {"potencia_maxima", col_horas}.issubset(df_fil.columns):
+        graficar_dispersion(df_fil, "potencia_maxima", col_horas)
+    if {col_horas, "energia_activa"}.issubset(df_fil.columns):
+        graficar_regresion_lineal(df_fil, col_horas, "energia_activa")
+else:
+    print("⚠️  Insuficientes variables numéricas para correlación/regresión")

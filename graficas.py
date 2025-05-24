@@ -67,39 +67,39 @@ from scipy.stats import norm, linregress
 #     plt.savefig(f'{col}_barras_categoria.png')
 #     print(f"✅ Barras guardadas como '{col}_barras_categoria.png'")
 
-# def graficar_matriz_correlacion(df, cols):
-#     plt.figure(figsize=(8, 6))
-#     corr = df[cols].corr()
-#     sns.heatmap(corr, annot=True, cmap='coolwarm', fmt='.2f')
-#     plt.title('Matriz de Correlación')
-#     plt.savefig('matriz_correlacion.png')
-#     print("✅ Mapa de calor guardado como 'matriz_correlacion.png'")
+def graficar_matriz_correlacion(df, cols):
+    plt.figure(figsize=(8, 6))
+    corr = df[cols].corr()
+    sns.heatmap(corr, annot=True, cmap='coolwarm', fmt='.2f')
+    plt.title('Matriz de Correlación')
+    plt.savefig('matriz_correlacion.png')
+    print("✅ Mapa de calor guardado como 'matriz_correlacion.png'")
 
-# def graficar_dispersion(df, x_col, y_col):
-#     plt.figure(figsize=(8, 6))
-#     plt.scatter(df[x_col], df[y_col], alpha=0.6)
-#     plt.title(f'Dispersión entre {x_col} y {y_col}')
-#     plt.xlabel(x_col)
-#     plt.ylabel(y_col)
-#     plt.grid(True)
-#     plt.savefig(f'dispersion_{x_col}_vs_{y_col}.png')
-#     print(f"✅ Dispersión guardada como 'dispersion_{x_col}_vs_{y_col}.png'")
+def graficar_dispersion(df, x_col, y_col):
+    plt.figure(figsize=(8, 6))
+    plt.scatter(df[x_col], df[y_col], alpha=0.6)
+    plt.title(f'Dispersión entre {x_col} y {y_col}')
+    plt.xlabel(x_col)
+    plt.ylabel(y_col)
+    plt.grid(True)
+    plt.savefig(f'dispersion_{x_col}_vs_{y_col}.png')
+    print(f"✅ Dispersión guardada como 'dispersion_{x_col}_vs_{y_col}.png'")
 
-# def graficar_regresion_lineal(df, x_col, y_col):
-#     x = df[x_col].dropna()
-#     y = df[y_col].dropna()
-#     slope, intercept, r_value, p_value, std_err = linregress(x, y)
+def graficar_regresion_lineal(df, x_col, y_col):
+    x = df[x_col].dropna()
+    y = df[y_col].dropna()
+    slope, intercept, r_value, p_value, std_err = linregress(x, y)
 
-#     plt.figure(figsize=(8, 6))
-#     plt.scatter(x, y, alpha=0.6, label='Datos')
-#     plt.plot(x, slope * x + intercept, 'r', label=f'Regresión: y={slope:.2f}x+{intercept:.2f}')
-#     plt.title(f'Regresión Lineal: {x_col} vs {y_col}')
-#     plt.xlabel(x_col)
-#     plt.ylabel(y_col)
-#     plt.legend()
-#     plt.grid(True)
-#     plt.savefig(f'regresion_{x_col}_vs_{y_col}.png')
-#     print(f"✅ Regressión lineal guardada como 'regresion_{x_col}_vs_{y_col}.png'")
+    plt.figure(figsize=(8, 6))
+    plt.scatter(x, y, alpha=0.6, label='Datos')
+    plt.plot(x, slope * x + intercept, 'r', label=f'Regresión: y={slope:.2f}x+{intercept:.2f}')
+    plt.title(f'Regresión Lineal: {x_col} vs {y_col}')
+    plt.xlabel(x_col)
+    plt.ylabel(y_col)
+    plt.legend()
+    plt.grid(True)
+    plt.savefig(f'regresion_{x_col}_vs_{y_col}.png')
+    print(f"✅ Regressión lineal guardada como 'regresion_{x_col}_vs_{y_col}.png'")
 
 def graficar_barras_promedio_municipio(df, col_horas, col_municipio):
     promedios = df.groupby(col_municipio)[col_horas].mean().sort_values()
@@ -252,6 +252,12 @@ def graficar_regresion_lineal_por_municipio(
               f"(Top {top_n_lowest} municipios con menor promedio)" if top_n_lowest
               else f"Regresión lineal de {y_col} vs {x_col} por municipio")
     plt.legend(bbox_to_anchor=(1.04, 1), loc="upper left", fontsize=7)
+
+    # Mostrar años como enteros en el eje X si corresponde
+    if x_col in ["ano_servicio", "año_servicio", "anio", "ano"]:
+        todos_los_anos = sorted(set(df[x_col].dropna().astype(int)))
+        plt.xticks(todos_los_anos, [str(a) for a in todos_los_anos])
+
     plt.tight_layout()
 
     if guardar:
