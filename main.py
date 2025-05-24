@@ -15,20 +15,15 @@ from limpieza import normalizar_dataset
 from estadisticas import (
     mostrar_promedio, mostrar_mediana, mostrar_varianza,
     mostrar_desviacion_estandar, mostrar_percentiles, posicion_percentil)
-# from graficas import (
-#     graficar_distribucion_normal, graficar_promedio, graficar_boxplot,
-#     graficar_histograma, graficar_barras_categoria, graficar_matriz_correlacion,
-#     graficar_dispersion, graficar_regresion_lineal,
-#         graficar_barras_promedio_municipio,
-#     graficar_boxplot_promedio_municipio,
-#     graficar_violin_promedio_municipio,graficar_diagrama_dispersion)
+
 from graficas import (
     graficar_barras_promedio_municipio,
     graficar_boxplot_promedio_municipio,
     graficar_violin_promedio_municipio,
     graficar_diagrama_dispersion,
     graficar_promedio_pie_municipio,
-    graficar_histograma_anio
+    graficar_histograma_anio,
+    graficar_regresion_lineal_por_municipio
 )
 
 
@@ -95,7 +90,8 @@ mostrar_percentiles(df_fil, col_horas)
 # --------------------- Gráficas ---------------------------------------------
 
 #graficar_barras_categoria(df_fil, col_horas)
-####graficar_diagrama_dispersion por municipio
+
+#graficar_diagrama_dispersion por municipio
 graficar_diagrama_dispersion(df_fil, "energia_activa", col_horas)
 graficar_diagrama_dispersion(df_fil, "energia_reactiva", "energia_activa")
 
@@ -108,7 +104,8 @@ graficar_promedio_pie_municipio(df_fil, "energia_activa", "departamento")
 graficar_histograma_anio(df_fil, col_horas, "ano_servicio")
 
 
-####modelo de regresion lineal por municipio
+#modelo de regresion lineal por municipio
+graficar_regresion_lineal_por_municipio(df_fil, "promedio_diario_en_horas", "energia_activa", "municipio", top_n=15)
 
 
 #grafica por barras
@@ -116,9 +113,6 @@ graficar_barras_promedio_municipio(df_fil, col_horas, "municipio")
 #graficas cajas y bigotes 
 graficar_boxplot_promedio_municipio(df_fil, col_horas, "municipio")
 #graficas violin
-graficar_violin_promedio_municipio(df_fil, col_horas, "municipio")
-
-
 
 # vars_num = [v for v in ["energia_activa", "energia_reactiva", "potencia_maxima", col_horas] if v in df_fil.columns]
 # if len(vars_num) >= 2:
