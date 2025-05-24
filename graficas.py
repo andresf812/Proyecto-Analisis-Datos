@@ -194,38 +194,95 @@ def graficar_histograma_anio(df, col_horas, col_anio):
     plt.savefig(f'histograma_{col_horas}_por_anio.png')
     print(f"✅ Gráfica guardada como 'promedio_histograma_{col_horas}_por_anio.png'")
 
-def graficar_regresion_lineal_por_municipio(df, x_col, y_col, municipio_col, top_n=10, min_puntos=3):
-    municipios = df[municipio_col].unique()
+def graficar_regresion_lineal_por_municipio(
+        df,
+        x_col: str = "ano_servicio",
+        y_col: str = "promedio_diario_en_horas",
+        municipio_col: str = "municipio",
+        *,
+        min_puntos: int = 3,
+        top_n: int = 10,
+        municipios_a_mostrar: list[str] | None = None,
+        guardar: bool = True,
+) -> None:
+    """
+    Dibuja la regresión lineal Y vs X para cada municipio que tenga
+    al menos `min_puntos` registros válidos. Además, si `top_n` > 0,
+    genera un gráfico de barras con los municipios cuyo promedio en Y
+    es más bajo.
+
+    Parámetros
+    ----------
+    df : pandas.DataFrame
+        Datos de entrada.
+    x_col : str
+        Columna numérica independiente (por defecto 'ano_servicio').
+    y_col : str
+        Columna numérica dependiente (por defecto 'promedio_diario_en_horas').
+    municipio_col : str
+        Columna con el nombre del municipio.
+    min_puntos : int
+        Mínimo de observaciones por municipio para ajustar la recta.
+    top_n : int
+        Número de municipios a mostrar en el ranking de peores promedios.
+        Use 0 para omitir el ranking.
+    municipios_a_mostrar : list[str] | None
+        Permite filtrar una lista específica de municipios.
+    guardar : bool
+        Si True, guarda los PNG; si False, solo muestra en pantalla.
+    """
+    # ─── Iterar sobre municipios ──────────────────────────────────
+    if municipios_a_mostrar is None:
+        municipios_iter = df[municipio_col].unique()
+    else:
+        municipios_iter = municipios_a_mostrar
+
     plt.figure(figsize=(10, 7))
-    for municipio in municipios:
-        datos = df[df[municipio_col] == municipio][[x_col, y_col]].dropna()
+
+    for mpio in municipios_iter:
+        datos = df[df[municipio_col] == mpio][[x_col, y_col]].dropna()
         if len(datos) < min_puntos:
             continue
-        x = datos[x_col]
-        y = datos[y_col]
-        slope, intercept, _, _, _ = linregress(x, y)
-        plt.scatter(x, y, label=f"{municipio}", alpha=0.5)
-        # Para que la línea cubra todo el rango de x de ese municipio:
-        x_line = np.linspace(x.min(), x.max(), 100)
-        y_line = slope * x_line + intercept
-        plt.plot(x_line, y_line)
-    plt.xlabel(x_col)
-    plt.ylabel(y_col)
-    plt.title(f"Regresión lineal de {y_col} vs {x_col} por municipio")
-    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
-    plt.tight_layout()
-    plt.savefig(f'regresion_lineal_{y_col}_vs_{x_col}_por_municipio.png', bbox_inches='tight')
-    print(f"✅ Gráfica guardada como 'regresion_lineal_{y_col}_vs_{x_col}_por_municipio.png'")
 
-    # --- Top N municipios con menor promedio diario en horas ---
-    if x_col == "promedio_diario_en_horas" and top_n > 0:
-        promedios = df.groupby(municipio_col)[x_col].mean().sort_values().head(top_n)
-        plt.figure(figsize=(10, 6))
-        promedios.plot(kind='bar', color='tomato')
-        plt.title(f'Top {top_n} municipios con menor promedio diario en horas')
-        plt.xlabel('Municipio')
-        plt.ylabel('Promedio diario en horas')
-        plt.xticks(rotation=45, ha='right')
+        x = datos[x_col].values
+        y = datos[y_col].values
+        slope, intercept, r, *_ = linregress(x, y)
+
+        # Puntos y línea
+        plt.scatter(x, y, alpha=0.6, label=f"{mpio} (β={slope:.2f})")
+        x_line = np.linspace(x.min(), x.max(), 100)
+        plt.plot(x_line, slope * x_line + intercept)
+
+    plt.xlabel(x_col.replace("_", " ").title())
+    plt.ylabel(y_col.replace("_", " ").title())
+    plt.title(f"Regresión lineal de {y_col} vs {x_col} por municipio")
+    plt.legend(bbox_to_anchor=(1.04, 1), loc="upper left", fontsize=7)
+    plt.tight_layout()
+
+    if guardar:
+        nombre = f"regresion_lineal_{y_col}_vs_{x_col}_por_municipio.png"
+        plt.savefig(nombre, dpi=150, bbox_inches="tight")
+        print(f"✅ Gráfica guardada como '{nombre}'")
+    else:
+        plt.show()
+
+    # ─── Ranking de municipios con peor promedio ─────────────────
+    if top_n > 0:
+        promedios = (df.groupby(municipio_col)[y_col]
+                     .mean()
+                     .sort_values()
+                     .head(top_n))
+
+        plt.figure(figsize=(10, 5))
+        promedios.plot(kind="bar", color="tomato")
+        plt.title(f"Top {top_n} municipios con menor {y_col}")
+        plt.ylabel(y_col.replace("_", " ").title())
+        plt.xticks(rotation=45, ha="right")
         plt.tight_layout()
-        plt.savefig(f'top{top_n}_municipios_menor_promedio_diario_en_horas.png')
-        print(f"✅ Gráfica guardada como 'top{top_n}_municipios_menor_promedio_diario_en_horas.png'")
+
+        if guardar:
+            nombre_rank = f"top{top_n}_municipios_menor_{y_col}.png"
+            plt.savefig(nombre_rank, dpi=150, bbox_inches="tight")
+            print(f"✅ Gráfica guardada como '{nombre_rank}'")
+        else:
+            plt.show()
