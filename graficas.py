@@ -201,88 +201,75 @@ def graficar_regresion_lineal_por_municipio(
         municipio_col: str = "municipio",
         *,
         min_puntos: int = 3,
-        top_n: int = 10,
         municipios_a_mostrar: list[str] | None = None,
         guardar: bool = True,
+        nombre_archivo: str | None = None,
 ) -> None:
     """
-    Dibuja la regresión lineal Y vs X para cada municipio que tenga
-    al menos `min_puntos` registros válidos. Además, si `top_n` > 0,
-    genera un gráfico de barras con los municipios cuyo promedio en Y
-    es más bajo.
+    Dibuja la regresión lineal Y vs X para cada municipio que posea
+    al menos `min_puntos` registros y más de un valor distinto en X.
+    No genera gráficos adicionales.
 
     Parámetros
     ----------
     df : pandas.DataFrame
         Datos de entrada.
     x_col : str
-        Columna numérica independiente (por defecto 'ano_servicio').
+        Columna independiente numérica (p. ej. 'ano_servicio').
     y_col : str
-        Columna numérica dependiente (por defecto 'promedio_diario_en_horas').
+        Columna dependiente numérica (p. ej. 'promedio_diario_en_horas').
     municipio_col : str
-        Columna con el nombre del municipio.
+        Columna categórica con el nombre del municipio.
     min_puntos : int
         Mínimo de observaciones por municipio para ajustar la recta.
-    top_n : int
-        Número de municipios a mostrar en el ranking de peores promedios.
-        Use 0 para omitir el ranking.
     municipios_a_mostrar : list[str] | None
-        Permite filtrar una lista específica de municipios.
+        Lista opcional con municipios concretos que se desean graficar.
     guardar : bool
-        Si True, guarda los PNG; si False, solo muestra en pantalla.
+        True → guarda el PNG; False → lo muestra en pantalla.
+    nombre_archivo : str | None
+        Nombre personalizado del PNG (si `guardar=True`).
     """
-    # ─── Iterar sobre municipios ──────────────────────────────────
+
+    # ──────────── Selección de municipios ────────────
     if municipios_a_mostrar is None:
         municipios_iter = df[municipio_col].unique()
     else:
         municipios_iter = municipios_a_mostrar
 
+    # ──────────── Gráfico base ───────────────────────
     plt.figure(figsize=(10, 7))
 
     for mpio in municipios_iter:
         datos = df[df[municipio_col] == mpio][[x_col, y_col]].dropna()
+
+        # Filtrado: suficientes puntos y X no constante
         if len(datos) < min_puntos:
             continue
+        x_vals = datos[x_col].values
+        y_vals = datos[y_col].values
+        if np.unique(x_vals).size < 2:
+            continue
 
-        x = datos[x_col].values
-        y = datos[y_col].values
-        slope, intercept, r, *_ = linregress(x, y)
+        # Ajuste de regresión
+        slope, intercept, r, *_ = linregress(x_vals, y_vals)
 
-        # Puntos y línea
-        plt.scatter(x, y, alpha=0.6, label=f"{mpio} (β={slope:.2f})")
-        x_line = np.linspace(x.min(), x.max(), 100)
+        # Puntos y recta
+        plt.scatter(x_vals, y_vals, alpha=0.6, label=f"{mpio} (β={slope:.2f})")
+        x_line = np.linspace(x_vals.min(), x_vals.max(), 100)
         plt.plot(x_line, slope * x_line + intercept)
 
+    # Etiquetas y formato
     plt.xlabel(x_col.replace("_", " ").title())
     plt.ylabel(y_col.replace("_", " ").title())
     plt.title(f"Regresión lineal de {y_col} vs {x_col} por municipio")
     plt.legend(bbox_to_anchor=(1.04, 1), loc="upper left", fontsize=7)
     plt.tight_layout()
 
+    # Guardar o mostrar
     if guardar:
-        nombre = f"regresion_lineal_{y_col}_vs_{x_col}_por_municipio.png"
-        plt.savefig(nombre, dpi=150, bbox_inches="tight")
-        print(f"✅ Gráfica guardada como '{nombre}'")
+        if nombre_archivo is None:
+            nombre_archivo = f"regresion_lineal_{y_col}_vs_{x_col}_por_municipio.png"
+        plt.savefig(nombre_archivo, dpi=150, bbox_inches="tight")
+        print(f"✅ Gráfica guardada como '{nombre_archivo}'")
     else:
         plt.show()
-
-    # ─── Ranking de municipios con peor promedio ─────────────────
-    if top_n > 0:
-        promedios = (df.groupby(municipio_col)[y_col]
-                     .mean()
-                     .sort_values()
-                     .head(top_n))
-
-        plt.figure(figsize=(10, 5))
-        promedios.plot(kind="bar", color="tomato")
-        plt.title(f"Top {top_n} municipios con menor {y_col}")
-        plt.ylabel(y_col.replace("_", " ").title())
-        plt.xticks(rotation=45, ha="right")
-        plt.tight_layout()
-
-        if guardar:
-            nombre_rank = f"top{top_n}_municipios_menor_{y_col}.png"
-            plt.savefig(nombre_rank, dpi=150, bbox_inches="tight")
-            print(f"✅ Gráfica guardada como '{nombre_rank}'")
-        else:
-            plt.show()

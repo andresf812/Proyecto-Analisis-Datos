@@ -107,14 +107,13 @@ graficar_histograma_anio(df_fil, col_horas, "ano_servicio")
 #modelo de regresion lineal por municipio
 #graficar_regresion_lineal_por_municipio(df_fil, "promedio_diario_en_horas", "energia_activa", "municipio", top_n=15)
 graficar_regresion_lineal_por_municipio(
-    df_fil,
+    df,
     x_col="ano_servicio",
     y_col="promedio_diario_en_horas",
     municipio_col="municipio",
-    top_n=15,
-    min_puntos=3
+    min_puntos=3,
+    guardar=True          # True = guardar PNG; False = solo mostrar
 )
-
 
 #grafica por barras
 graficar_barras_promedio_municipio(df_fil, col_horas, "municipio")
