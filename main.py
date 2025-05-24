@@ -40,23 +40,20 @@ col_horas = "promedio_diario_en_horas"
 if col_horas not in df.columns:
     raise KeyError("Columna promedio_diario_en_horas ausente")
 
-modo = input("¿Filtrar por municipio (M) o departamento (D)? [M/D]: ").strip().upper()
-
+# Filtro opcional por municipio
+entrada = input("Ingrese ID de municipio (opcional, Enter para todos): ").strip()
 df_sel = pd.DataFrame()
 nombre_filtro = ""
 
-if modo == "M":
-    id_mun = int(input("ID municipio: "))
+if entrada:
+    id_mun = int(entrada)
     df_sel = df[df["id_municipio"] == id_mun]
     if df_sel.empty:
         raise ValueError("Municipio no encontrado")
     nombre_filtro = df_sel["municipio"].iloc[0].replace("_", " ").title()
 else:
-    id_dep = int(input("ID departamento: "))
-    df_sel = df[df["id_departamento"] == id_dep]
-    if df_sel.empty:
-        raise ValueError("Departamento no encontrado")
-    nombre_filtro = df_sel["departamento"].iloc[0].replace("_", " ").title()
+    df_sel = df
+    nombre_filtro = "Todos los municipios"
 
 # Descripción del análisis
 descripcion = input("Descripción breve del análisis (opcional): ").strip()
