@@ -6,66 +6,6 @@ import pandas as pd
 import seaborn as sns
 from scipy.stats import norm, linregress
 
-# def graficar_diagrama_dispersion(df, col):
-#     datos = df[col].dropna()
-#     media = datos.mean()
-#     std = datos.std()
-
-#     plt.figure(figsize=(10, 6))
-#     plt.hist(datos, bins=30, density=True, alpha=0.6, color='skyblue', label='Datos')
-#     x = np.linspace(datos.min(), datos.max(), 100)
-#     p = norm.pdf(x, media, std)
-#     plt.plot(x, p, 'r', linewidth=2, label='Distribución Normal')
-#     plt.title(f'Distribución de {col}')
-#     plt.xlabel(col)
-#     plt.ylabel('Densidad')
-#     plt.legend()
-#     plt.grid(True)
-#     plt.savefig(f'{col}_distribucion.png')
-#     print(f"✅ Gráfica guardada como '{col}_distribucion.png'")
-
-# def graficar_pie(df, col):
-#     plt.figure(figsize=(8, 8))
-#     valores = df[col].value_counts().head(10)
-#     etiquetas = valores.index.astype(str)
-
-#     plt.pie(valores, labels=etiquetas, autopct='%1.1f%%', startangle=140)
-#     plt.title(f'Distribución de {col} (Top 10 valores)')
-#     plt.axis('equal')
-#     plt.tight_layout()
-#     plt.savefig(f'{col}_pie.png')
-#     print(f"✅ Gráfica guardada como '{col}_pie.png'")
-
-# def graficar_boxplot(df, col):
-#     plt.figure(figsize=(10, 6))
-#     plt.boxplot(df[col].dropna(), vert=False)
-#     plt.title(f'Boxplot de {col}')
-#     plt.xlabel(col)
-#     plt.grid(True)
-#     plt.savefig(f'{col}_boxplot.png')
-#     print(f"✅ Gráfica guardada como '{col}_boxplot.png'")
-
-# def graficar_histograma(df, col):
-#     plt.figure(figsize=(8, 5))
-#     plt.hist(df[col].dropna(), bins=20, color='skyblue', edgecolor='black')
-#     plt.title(f'Histograma de {col}')
-#     plt.xlabel(col)
-#     plt.ylabel('Frecuencia')
-#     plt.grid(True)
-#     plt.savefig(f'{col}_histograma.png')
-#     print(f"✅ Histograma guardado como '{col}_histograma.png'")
-
-# def graficar_barras_categoria(df, col):
-#     categorias = pd.cut(df[col], bins=[0, 8, 16, 24], labels=["Baja", "Media", "Alta"])
-#     conteo = categorias.value_counts().sort_index()
-#     plt.figure(figsize=(8, 6))
-#     conteo.plot(kind='bar', color=['red', 'orange', 'green'])
-#     plt.title(f'Disponibilidad de {col} por Categoría')
-#     plt.xlabel('Categoría')
-#     plt.ylabel('Cantidad')
-#     plt.grid(True)
-#     plt.savefig(f'{col}_barras_categoria.png')
-#     print(f"✅ Barras guardadas como '{col}_barras_categoria.png'")
 
 def graficar_matriz_correlacion(df, cols):
     plt.figure(figsize=(8, 6))
@@ -169,17 +109,6 @@ def graficar_promedio_histograma_municipio_anio(df, col_horas, col_municipio, co
     plt.savefig(f'histograma_promedio_{col_horas}_por_municipio_anio.png')
     print(f"✅ Histograma guardado como 'histograma_promedio_{col_horas}_por_municipio_anio.png'")
 
-# def graficar_promedio_histograma_anio(df, col_anio, col_horas):
-#     promedios = df.groupby(col_anio)[col_horas].mean()
-#     plt.figure(figsize=(8, 6))
-#     plt.hist(promedios, bins=len(promedios), color='skyblue', edgecolor='black')
-#     plt.title(f'Histograma del promedio de {col_horas} por año')
-#     plt.xlabel(f'Promedio de {col_horas}')
-#     plt.ylabel('Cantidad de años')
-#     plt.grid(True)
-#     plt.tight_layout()
-#     plt.savefig(f'histograma_promedio_{col_horas}_por_anio.png')
-#     print(f"✅ Histograma guardado como 'histograma_promedio_{col_horas}_por_anio.png'")
 
 def graficar_histograma_anio(df, col_horas, col_anio):
     promedios = df.groupby(col_anio)[col_horas].mean()
